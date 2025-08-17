@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WildBuddy</title>
+  
+  <style>/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+  background: #ffffff;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #0077ff;
+}
+
+/* Hero */
+.hero {
+  height: 100vh;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+    url('https://uploads.onecompiler.io/43rucs8em/43rwsavn5/Capture.PNG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 700px;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.btn {
+  background: #0077ff;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  background: #005fcc;
+}
+
+.animal-counter {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sections */
+.section {
+  padding: 80px 0;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dark {
+  background: #f0f0f0;
+}
+
+/* Characters */
+.characters-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.character-card {
+  background: #f0f9ff;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 220px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-8px);
+}
+
+.character-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.character-card h3 {
+  color: #0077ff;
+  margin-bottom: 0.75rem;
+}
+
+.select-btn {
+  background: #0077ff;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.select-btn:hover {
+  background: #005fcc;
+}
+
+/* Services */
+.services-list {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service-item {
+  background: #e0f7fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  max-width: 300px;
+}
+
+.service-item h3,
+.service-item p {
+  text-align: center;
+}
+
+.service-item p {
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #0077ff;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid #0077ff;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #005fcc;
+  box-shadow: 0 0 5px rgba(0, 95, 204, 0.5);
+}
+
+.contact-form button.btn {
+  align-self: flex-start;
+}
+
+/* Footer */
+.footer {
+  background: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 60px;
+}
+
+/* Chat Screen Overlay */
+#chatScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(212, 237, 255, 0.9); /* semi-transparent */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Phone container inside chat */
+.phone {
+  width: 100vw;         /* width = 90% of viewport width */
+  height: 100vh;       /* but no taller than 600px */
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat Header */
+.chat-header {
+  background: #0077ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+}
+
+.chat-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.chat-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-grow: 1;
+}
+
+.chat-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: #f9f9f9;
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  max-width: 70%;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.from-user {
+  align-self: flex-end;
+  background-color: #cce5ff;
+  color: #003366;
+}
+
+.from-creature {
+  align-self: flex-start;
+  background-color: #fff3cd;
+  color: #665c00;
+}
+
+/* Chat Options (buttons) */
+.chat-options {
+  background: #ffffff;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.chat-btn {
+  background: #0077ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.chat-btn:hover {
+  background: #005fcc;
+}
+
+/* Hidden utility */
+.hidden {
+  display: none !important;
+}
+
+/* Shop Section */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.shop-item {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.shop-item:hover {
+  transform: translateY(-5px);
+}
+
+.shop-item img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.shop-item h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.shop-item p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.shop-item .price {
+  display: block;
+  margin: 0.5rem 0;
+  font-weight: bold;
+  color: #2d7a2d;
+  font-size: 1.1rem;
+}
+
+.shop-item .btn {
+  background-color: #5cb85c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+#shop {
+  display: none;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="container">
+    <h1 class="logo">WildBuddy</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#shop">Shop</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <h2 class="hero-title">🐾 Meet Your New Wild Pals—Before They Disappear!</h2>
+    <p class="hero-subtitle">Play, chat, and learn with cartoon endangered animals who need your help! Can you save them?</p>
+    <a href="#characters" class="btn">🦋 Start the Adventure!</a>
+    <div class="animal-counter">
+      <span id="animalCount">245,654</span> animals saved today!
+    </div>
+  </div>
+</section>
+
+<!-- Characters Selection Section -->
+<section class="section" id="characters">
+  <div class="container">
+    <h2>Choose Your WildBuddy</h2>
+    <p>Pick one of our playful endangered animal friends to start your adventure!</p>
+    <div class="characters-grid">
+
+      <div class="character-card" data-character="Mischievous Axolotl">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Jul%2028,%202025,%2007_08_20%20PM.png" alt="Mischievous Axolotl" />
+        <h3>Mischievous Axolotl</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+      <div class="character-card" data-character="Wise Old Elephant">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Jul%2028,%202025,%2006_54_40%20PM.png" alt="Wise Old Elephant" />
+        <h3>Wise Old Elephant</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+      <div class="character-card" data-character="Stubborn Rhino">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/cde4ec4c-befc-4e54-87d9-2a68b43cedc6.png" alt="Stubborn Rhino" />
+        <h3>Stubborn Rhino</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+      <div class="character-card" data-character="Shy Turtle">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/f8fe2dbd-a27f-4a23-9211-aefa6e682d90.png" alt="Shy Turtle" />
+        <h3>Shy Turtle</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+      <div class="character-card" data-character="Curious Cheetah">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/Chhetah.png" alt="Curious Cheetah" />
+        <h3>Curious Cheetah</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+      <div class="character-card" data-character="Cheerful Penguin">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/a596c768-abba-4960-b5c3-fffbf0e17853.png" alt="Cheerful Penguin" />
+        <h3>Cheerful Penguin</h3>
+        <button class="select-btn">Choose Me!</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+  <div class="container">
+    <h2>About Us</h2>
+    <p><strong>Welcome to WildBuddy</strong>, where learning about endangered animals is as fun as it is important!</p>
+    <p>Our mission is simple: to inspire curiosity and compassion for the planet’s most vulnerable creatures...</p>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="section" id="services">
+  <div class="container">
+    <h2>Our Services</h2>
+    <div class="services-list">
+      <div class="service-item">
+        <h3>Interactive Cartoon Animal Characters</h3>
+        <p>Users engage with playful, animated versions of endangered animals.</p>
+      </div>
+      <div class="service-item">
+        <h3>Edutainment Content</h3>
+        <p>Fun, bite-sized lessons about endangered species.</p>
+      </div>
+      <div class="service-item">
+        <h3>Awareness Through Engagement</h3>
+        <p>Your site isn’t just facts—it’s designed to make users care by building emotional connections with the animals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section" id="contact">
+  <div class="container">
+    <h2>Contact Us</h2>
+    <form class="contact-form" action="#" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="Your phone number" />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Chat Screen Overlay -->
+<div id="chatScreen" class="hidden">
+  <div class="phone" role="dialog" aria-modal="true" aria-labelledby="chatProfileName">
+    <div class="chat-header">
+      <img id="chatProfilePic" class="chat-pic" src="" alt="Profile Picture" />
+      <span id="chatProfileName" class="chat-name"></span>
+      <button onclick="closeChat()" class="chat-close" aria-label="Close chat">✖</button>
+    </div>
+    <div id="chatMessages" class="chat-messages" tabindex="0"></div>
+    <div id="chatOptions" class="chat-options"></div>
+  </div>
+</div>
+
+<!-- Shop Section -->
+<section class="section" id="shop">
+  <div class="container">
+    <h2>🌿 WildBuddy Shop</h2>
+    <p>Support wildlife with fun gear! Every purchase helps protect endangered animals.</p>
+    <div class="shop-grid">
+
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43skwjabe/ChatGPT%20Image%20Aug%203,%202025,%2001_57_53%20PM.png" alt="Axolotl Plush" />
+        <h3>Axolotl Plush</h3>
+        <p>Soft, silly, and slightly mischievous!</p>
+        <span class="price">R250.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2006_42_52%20PM.png" alt="Elephant Poster" />
+        <h3>Elephant Wisdom Poster</h3>
+        <p>Daily inspiration from our wise old friend.</p>
+        <span class="price">R120.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+      
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2006_48_16%20PM.png" alt="Elephant Poster" />
+        <h3>Stubborn Rhino Hat</h3>
+        <p>Unshakable style from your hard-headed topper!</p>
+        <span class="price">R250.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+      
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2007_01_28%20PM.png" alt="Elephant Poster" />
+        <h3>Shy Turtle Shirt</h3>
+        <p>Shy but secretly fabulous.</p>
+        <span class="price">R300.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+      
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2007_43_08%20PM.png" alt="Elephant Poster" />
+        <h3>Curious Cheetah Hoodie</h3>
+        <p>Built for speed, powered by ‘what’s over there?!’.</p>
+        <span class="price">R500.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2006_31_43%20PM.PNG" alt="Penguin Mug" />
+        <h3>Penguin Mug</h3>
+        <p>Waddle into your day with a warm drink!</p>
+        <span class="price">R150.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+      
+      <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2007_51_46%20PM.png" alt="Penguin Mug" />
+        <h3>WildBuddy's Tracksuit</h3>
+        <p>Move in silence. Protect with purpose.</p>
+        <span class="price">R800.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+      
+       <div class="shop-item">
+        <img src="https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Aug%207,%202025,%2008_01_17%20PM.png" alt="Penguin Mug" />
+        <h3>WildBuddy's Phone case</h3>
+        <p>Protect your phone. Protect their home.</p>
+        <span class="price">R180.00</span>
+        <button class="btn">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 WildBuddy. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Animal counter increment
+const animalCount = document.getElementById("animalCount");
+let count = 245654;
+function incrementCounter() {
+  count++;
+  animalCount.textContent = count.toLocaleString();
+}
+setInterval(incrementCounter, 5000);
+
+// Character Q&A data
+const characterData = {
+  "Mischievous Axolotl": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Jul%2028,%202025,%2007_08_20%20PM.png",
+    qa: [
+      ["Why are axolotls critically endangered in the wild?", "Because humans ruined my swampy playground with icky pollution and dumb fish that eat my snacks! Not cool!"],
+      ["How many wild axolotls are estimated to remain?", "Fewer than 1,000—maybe just 100! But don’t worry, I’ll hide in a lab and regrow my way to victory!"],
+      ["What conservation program exists to save them?", "Scientists are breeding us in tanks, but I’d rather sneak into Mexico’s canals and prank those invasive fish!"],
+      ["Why are invasive fish a threat to axolotls?", "They steal my food and gobble my eggs! Rude. I’d challenge them to a regrowing contest, but they’re boring."],
+      ["Could axolotls go extinct in the wild soon?", "Pfft—maybe in the wild. But I’ll live forever in labs, plotting my comeback."],
+      ["Can axolotls regrow their limbs?", "Yep! Lose a chunk? No biggie. I’ll just poof it back. Try that, humans!"],
+      ["Why do axolotls look like they’re smiling?", "Because I am! While you stress about life, I’m over here regrowing limbs like it’s NBD."],
+      ["Are axolotls actually baby salamanders?", "Nah, I’m the Peter Pan of amphibians—eternally young and way cuter than those boring grown-up salamanders."],
+      ["What unusual color can axolotls be?", "Golden, glow-in-the-dark, pink—I’m the rave party of the animal kingdom."],
+      ["Do axolotls make sounds?", "Silent but deadly (with cuteness). My mischief speaks for itself!"]
+    ]
+  },
+  "Wise Old Elephant": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/ChatGPT%20Image%20Jul%2028,%202025,%2006_54_40%20PM.png",
+    qa: [
+      ["Why are African elephants endangered?", "Foolish humans hunt us for ivory, forgetting that tusks are part of our souls. Greed blinds them."],
+      ["How many African elephants are left in the wild?", "Once, we roamed in millions. Now, barely 415,000 walk these lands. A tragedy whispered on the wind."],
+      ["What’s the biggest threat to elephants?", "The clash of hunger and greed—men who strip our homes for farms, then kill us for our teeth."],
+      ["Why are Asian elephants also endangered?", "Their forests shrink like drying rivers. We remember when the earth was vast… now it withers."],
+      ["What gives hope for elephant conservation?", "The young ones remember. They teach their calves the old ways, and some humans fight for us. There is time yet."],
+      ["How do elephants communicate over long distances?", "Through rumbles deeper than thunder, felt by the feet. The earth herself carries our stories."],
+      ["Why do elephants throw dirt on themselves?", "The sun scorches, the bugs bite—mud is nature’s armor. Simple, yet fools ignore its wisdom."],
+      ["Can elephants recognize themselves in a mirror?", "Indeed. I see the wrinkles of time in mine—do you see your own truth in the glass?"],
+      ["How much do elephant calves weigh at birth?", "200 pounds of future, small but mighty. Like the acorn that dreams of oaks."],
+      ["Do elephants really never forget?", "We remember waterholes dried for decades, friends long gone. Memory is a blessing… and a burden."]
+    ]
+  },
+  "Stubborn Rhino": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/cde4ec4c-befc-4e54-87d9-2a68b43cedc6.png",
+    qa: [
+      ["Why are rhinos poached?", "Because idiots think my horn cures hangovers. Spoiler: IT'S KERATIN. LIKE YOUR NAILS."],
+      ["How many Javan rhinos remain?", "Less than 80. And no, I won't 'just breed faster.' We're not rabbits."],
+      ["What's being done to stop rhino poaching?", "They cut off my horn to deter thieves. Humiliating, but fine. I'll grow it back. Slowly. Grudgingly."],
+      ["Why do rhinos charge when threatened?", "Because talking politely doesn't work.Sometimes you gotta go 40 mph to make a point."],
+      ["Are northern white rhinos extinct?", "Two females left. Science might clone them, but I'll believe it when I see it."],
+      ["How fast can rhinos run?", "40 mph. Surprised? Bet you can't outrun me."],
+      ["Why do rhinos love mud?", "It's sunscreen, bug spray, and a spa day. You'd wallow too if you had no hair."],
+      ["What's a group of rhinos called?", "A 'crash.' Because we crash through everything. Obviously."],
+      ["Are rhinos related to dinosaurs?", "No. And stop asking. I'm a mammal, not a fossil. mutters"],
+      ["How long does it take to regrow a horn?", "Three years. And yes, it itches."]
+    ]
+  },
+  "Shy Turtle": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/f8fe2dbd-a27f-4a23-9211-aefa6e682d90.png",
+    qa: [
+      ["Why are sea turtles endangered?", "Oh, um… plastic bags look like jellyfish? And beaches are noisy now. It's… a lot. retracts slightly"],
+      ["How does climate change affect turtle hatchlings?", "Sand gets too hot, so only girls hatch. It's… awkward.We need balance."],
+      ["Which turtle species is most threatened?", "Kemp's ridley. There's… not many left."],
+      ["Why do turtles eat plastic?", "I-it looks like jellyfish! I didn't mean to…"],
+      ["Can turtles recover from population declines?", "Maybe? But we live so long, and… everything's changing too fast."],
+      ["Can turtles breathe through their butts?", "…Some of us can. It's called cloacal respiration. Please don't stare."],
+      ["How do leatherback turtles stay warm?", "We, uh… swim a lot. Muscles make heat. Can we talk about something else?"],
+      ["Is a turtle's shell part of its skeleton?", "Y-yes? It's fused to my spine."],
+      ["How do baby turtles find the ocean?", "Moonlight! But… city lights confuse them. It's scary."],
+      ["How long can turtles hold their breath?", "Up to 10 hours… but I'd rather not demonstrate."]
+    ]
+  },
+  "Curious Cheetah": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/Chhetah.png",
+    qa: [
+      ["Why are cheetah populations declining?", "Ooooh, let me explain! Humans take our land, and lions steal our food—it's so unfair!"],
+      ["How many cheetahs are left in the wild?", "Only 6,500! And did you know we're all kinda related? Genetics are fascinating!"],
+      ["Why don't cheetahs fight other predators?", "I could… but I'm built for speed, not brawling. Plus, hyenas are mean!"],
+      ["What conservation efforts help cheetahs?", "People make wildlife corridors! Like highways for cats!"],
+      ["Could cheetahs go extinct?", "I hope not! But we need space to zoom! Have you seen my latest sprint time?"],
+      ["How fast can a cheetah run?", "60 mph in THREE SECONDS! Wanna race? No? Okay…"],
+      ["What are a cheetah's 'tear marks' for?", "They're sunblock! And make me look dramatic."],
+      ["Can cheetahs roar?", "Nope! I chirp like a bird! See? So cute!"],
+      ["How long can a cheetah sprint?", "20 seconds… then I melt. Overheating is the worst."],
+      ["Why are cheetah claws semi-retractable?", "They're like cleats! Perfect for grip. Aren't they cool?!"]
+    ]
+  },
+  "Cheerful Penguin": {
+    img: "https://uploads.onecompiler.io/43rucs8em/43rwsavn5/a596c768-abba-4960-b5c3-fffbf0e17853.png",
+    qa: [
+      ["Why are penguin populations dropping?", "Ice melts, fish vanish—it's a bummer! But we're tough! Waddle on!"],
+      ["Which penguin species is most endangered?", "Galápagos penguins—less than 1,200! But we throw them fish parties!"],
+      ["How do oil spills harm penguins?", "Feathers get clumpy, and we freeze! But humans scrub us clean!"],
+      ["Why are African penguins struggling?", "No fish = hangry penguins. Can we fix it? Yes we can!"],
+      ["Can penguins adapt to climate change?", "We'll try! Maybe move? Start a penguin band?"],
+      ["How do penguins propose to mates?", "With a pebble gift! Smooth ones = penguin bling! presents rock"],
+      ["Can penguins drink seawater?", "Yup! Super-salt-filtering nose! Nature's Brita filter!"],
+      ["Why don't penguins' feet freeze?", "Magic blood vessels! Toasty warm, even in snow!"],
+      ["How deep can emperor penguins dive?", "Over 1,800 feet! Take that, scuba divers!"],
+      ["Do penguins have knees?", "YES! Under our fluff! Sneaky, huh?"]
+    ]
+  }
+};
+
+// Chat logic
+document.querySelectorAll(".select-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    const characterName = button.parentElement.querySelector("h3").textContent;
+    const data = characterData[characterName];
+    if (!data) return alert(`Oops! No chat data for ${characterName}.`);
+
+    const chatScreen = document.getElementById("chatScreen");
+    const profilePic = document.getElementById("chatProfilePic");
+    const profileName = document.getElementById("chatProfileName");
+    const messages = document.getElementById("chatMessages");
+    const options = document.getElementById("chatOptions");
+
+    profilePic.src = data.img;
+    profileName.textContent = characterName;
+    messages.innerHTML = "";
+    options.innerHTML = "";
+
+    // Randomize and copy QA
+    let remainingQA = [...data.qa].sort(() => 0.5 - Math.random());
+
+    function addQuestionButton(q, a) {
+      const btn = document.createElement("button");
+      btn.className = "chat-btn";
+      btn.textContent = q;
+      btn.onclick = () => {
+        // Add user question bubble
+        const userMsg = document.createElement("div");
+        userMsg.className = "chat-bubble from-user";
+        userMsg.textContent = q;
+        messages.appendChild(userMsg);
+
+        // Add creature answer bubble
+        const reply = document.createElement("div");
+        reply.className = "chat-bubble from-creature";
+        reply.textContent = a;
+        messages.appendChild(reply);
+
+        options.removeChild(btn);
+
+        // Scroll chat to bottom smoothly
+        messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+
+        // Add next question button if any left
+        if (remainingQA.length > 0) {
+          const [nextQ, nextA] = remainingQA.pop();
+          addQuestionButton(nextQ, nextA);
+        }
+      };
+      options.appendChild(btn);
+    }
+
+    // Start with up to 3 question buttons
+    for (let i = 0; i < 3 && remainingQA.length > 0; i++) {
+      const [q, a] = remainingQA.pop();
+      addQuestionButton(q, a);
+    }
+
+    chatScreen.classList.remove("hidden");
+    chatScreen.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Close chat screen
+function closeChat() {
+  document.getElementById("chatScreen").classList.add("hidden");
+}
+
+// Close chat with ESC key
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeChat();
+});
+// Wait until DOM loads
+document.addEventListener("DOMContentLoaded", () => {
+  const shopSection = document.getElementById("shop");
+  const shopLink = document.querySelector('a[href="#shop"]');
+
+  shopLink.addEventListener("click", (e) => {
+    e.preventDefault();  // Prevent default anchor jump
+
+    // Hide other sections if needed (optional)
+    document.querySelectorAll("section.section").forEach(sec => {
+      if (sec.id !== "shop") sec.style.display = "none";
+    });
+
+    // Show shop section
+    shopSection.style.display = "block";
+
+    // Scroll to the shop section smoothly
+    shopSection.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+</script>
+</body>
+</html>
