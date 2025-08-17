@@ -794,10 +794,14 @@ const characterData = {
 // Chat logic
 document.querySelectorAll(".select-btn").forEach(button => {
   button.addEventListener("click", () => {
-    const characterName = button.parentElement.querySelector("h3").textContent;
+    // Get character name and trim extra spaces
+    const characterName = button.parentElement.querySelector("h3").textContent.trim();
+
+    // Fetch data for this character
     const data = characterData[characterName];
     if (!data) return alert(`Oops! No chat data for ${characterName}.`);
 
+    // Get chat elements
     const chatScreen = document.getElementById("chatScreen");
     const profilePic = document.getElementById("chatProfilePic");
     const profileName = document.getElementById("chatProfileName");
@@ -809,7 +813,7 @@ document.querySelectorAll(".select-btn").forEach(button => {
     messages.innerHTML = "";
     options.innerHTML = "";
 
-    // Randomize and copy QA
+    // Shuffle QA and copy
     let remainingQA = [...data.qa].sort(() => 0.5 - Math.random());
 
     function addQuestionButton(q, a) {
@@ -831,7 +835,7 @@ document.querySelectorAll(".select-btn").forEach(button => {
 
         options.removeChild(btn);
 
-        // Scroll chat to bottom smoothly
+        // Scroll chat to bottom
         messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
 
         // Add next question button if any left
@@ -849,6 +853,7 @@ document.querySelectorAll(".select-btn").forEach(button => {
       addQuestionButton(q, a);
     }
 
+    // Show chat
     chatScreen.classList.remove("hidden");
     chatScreen.scrollIntoView({ behavior: "smooth" });
   });
